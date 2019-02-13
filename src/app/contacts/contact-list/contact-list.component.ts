@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  displayedColumns = ['name', 'email', 'twitter', 'phone', 'detail', 'update', 'delete'];
+  displayedColumns = ['name', 'email', 'twitter', 'phone', 'detail'];
   dataSource = new MatTableDataSource();
 
   public contacts: Contact[];
@@ -34,7 +34,6 @@ export class ContactListComponent implements OnInit {
   }
 
   onUpdateContact(id){
-    alert('VAI MALUCÃO!!! ' + id);
     this.router.navigate(['/contact-update/' + id]);
   }
 

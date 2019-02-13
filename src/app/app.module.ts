@@ -22,6 +22,7 @@ import { ContactListComponent } from './contacts/contact-list/contact-list.compo
 import { ContactInsertComponent } from './contacts/contact-insert/contact-insert.component';
 import { ContactUpdateComponent } from './contacts/contact-update/contact-update.component';
 import { ContactDeleteComponent } from './contacts/contact-delete/contact-delete.component';
+import { MatConfirmDialogComponent } from './shared/mat-confirm-dialog/mat-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ContactDeleteComponent } from './contacts/contact-delete/contact-delete
     ContactListComponent,
     ContactInsertComponent,
     ContactUpdateComponent,
-    ContactDeleteComponent
+    ContactDeleteComponent,
+    MatConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { ContactDeleteComponent } from './contacts/contact-delete/contact-delete
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  entryComponents: [ContactUpdateComponent, MatConfirmDialogComponent]
 })
 export class AppModule { }

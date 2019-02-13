@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { Observable } from "rxjs/Rx";
-import { Subject } from 'rxjs/Subject';
-import { from } from 'rxjs'
 
 import { Contact } from "../contacts/models/contact";
 
@@ -23,12 +21,27 @@ export class ContactService {
 
     list() {
         let res = this.http.get<Contact[]>(this.url, this.getHeadersJson());
-        console.log(JSON.stringify(res));
         return res;
     }
 
+    get(id: string): Observable<Contact> {
+        let res = this.http.get<Contact>(this.url + '/' + id, this.getHeadersJson());
+        return res;
+    }
 
-    // console.log(JSON.stringify(res));
+    insert(contact: Contact): Observable<Contact> {
+        let res = this.http.post<Contact>(this.url, contact, this.getHeadersJson());
+        return res;
+    }
+
+    update(contact: Contact): Observable<Contact> {
+        let res = this.http.patch<Contact>(this.url + '/' + contact._id, contact, this.getHeadersJson());
+        return res;
+    }
+
+    delete(id: string) {
+        return this.http.delete(this.url + '/' + id, this.getHeadersJson());
+    }
 
     // insert(book: Book): Observable<Book> {
     //     let response = this.http

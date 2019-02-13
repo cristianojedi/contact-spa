@@ -1,36 +1,15 @@
 <section>
-  <form
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    fxLayoutGap="10px"
-    [formGroup]="loginForm"
-    (ngSubmit)="onAuthenticate()">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm" (ngSubmit)="onAuthenticate()">
     <mat-form-field>
-      <input
-        type="email"
-        matInput
-        placeholder="Seu e-mail"
-        formControlName="email">
+      <input type="email" matInput placeholder="Seu e-mail" formControlName="email">
       <mat-hint>Digite um e-mail válido</mat-hint>
       <mat-error>E-mail inválido</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input
-        type="password"
-        matInput placeholder="Sua senha"
-        formControlName="password"
-        required minlength="6">
+      <input type="password" matInput placeholder="Sua senha" formControlName="password" required minlength="6">
       <mat-hint>Digite sua senha</mat-hint>
       <mat-error>Tem que ter pelo menos 6 caracteres</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Entrar</button>
   </form>
 </section>
-
-<!-- <ol>
-  <li>Add an email and password field (with Material Components of course)</li>
-  <li>Add validation (email => required and email, password => required)</li>
-  <li>Show errors and hints</li>
-  <li>Make form submittable and disable button if invalid</li>
-  <li>BONUS: Do all of that by using the reactive approach!</li>
-</ol> -->

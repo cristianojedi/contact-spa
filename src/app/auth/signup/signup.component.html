@@ -1,4 +1,4 @@
-<section class="signup-form">
+<section>
   <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-form-field>
       <input type="email" matInput placeholder="Seu e-mail" ngModel name="email" email required #emailInput="ngModel">
@@ -6,8 +6,7 @@
       <mat-error *ngIf="!emailInput.hasError('required')">E-Mail inválido</mat-error>
     </mat-form-field>
     <mat-form-field hintLabel="Deve conter pelo menos 6 caracteres">
-      <input type="password" matInput placeholder="Sua senha" ngModel name="password" required minlength="6" maxlength="20"
-        #pwInput="ngModel">
+      <input type="password" matInput placeholder="Sua senha" ngModel name="password" required minlength="6" maxlength="20" #pwInput="ngModel">
       <mat-hint align="end">{{ pwInput.value?.length }} / 20</mat-hint>
       <mat-error>Tem que ter pelo menos 6 caracteres</mat-error>
     </mat-form-field>
