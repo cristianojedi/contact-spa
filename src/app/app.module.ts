@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -14,6 +15,14 @@ import { AppRoutingModule } from "./app.routing.module";
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 
+import { UserService } from "./services/user.service";
+import { ContactService } from "./services/contact.service";
+
+import { ContactListComponent } from './contacts/contact-list/contact-list.component';
+import { ContactInsertComponent } from './contacts/contact-insert/contact-insert.component';
+import { ContactUpdateComponent } from './contacts/contact-update/contact-update.component';
+import { ContactDeleteComponent } from './contacts/contact-delete/contact-delete.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +30,11 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    ContactListComponent,
+    ContactInsertComponent,
+    ContactUpdateComponent,
+    ContactDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +43,15 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     AppRoutingModule,
     FormsModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    UserService,
+    ContactService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

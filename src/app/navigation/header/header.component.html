@@ -5,21 +5,22 @@
     </button>
   </div>
   <div>
-    <a routerLink="/">LOGO</a>
+    <a *ngIf="isAuth" routerLink="/">LOGO</a>
+    <a *ngIf="!isAuth" href="javascript:void(0)">LOGO</a>
   </div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-      <li>
-        <a routerLink="/signup">Signup</a>
+      <li *ngIf="!isAuth">
+        <a routerLink="/signup">Registre-se</a>
       </li>
-      <li>
-        <a routerLink="/login">Login</a>
+      <li *ngIf="!isAuth">
+        <a routerLink="/login">Entrar</a>
       </li>
-      <!-- <li>
-        <a routerLink="/training">Training</a>
-      </li> -->
-      <li>
-        <a>Logout</a>
+      <li *ngIf="isAuth">
+        <a routerLink="/contacts">Contatos</a>
+      </li>
+      <li *ngIf="isAuth">
+        <a href="javascript:void(0)" (click)="onLogout()">Sair</a>
       </li>
     </ul>
   </div>
