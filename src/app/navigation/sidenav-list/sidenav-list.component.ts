@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+// import { Subscription } from 'rxjs/Subscription';
 import { UserService } from "../../services/user.service";
 
 @Component({
@@ -11,34 +11,30 @@ import { UserService } from "../../services/user.service";
 export class SidenavListComponent implements OnInit {
   @Output() closeSidenav = new EventEmitter<void>();
 
-  isAuth = false;
-  authSubscription: Subscription;
-
-  public name: string = "";
-  public email: string = "";
+  // isAuth = false;
+  // authSubscription: Subscription;
 
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.authSubscription = this.userService.authChange.subscribe(authStatus => {
-      this.isAuth = authStatus;
-    });
+    // this.authSubscription = this.userService.authChange.subscribe(authStatus => {
+    //   this.isAuth = authStatus;
+    // });
+
+    // this.isAuth = this.userService.isAuth();
   }
 
-  onClose() {
-    this.closeSidenav.emit();
-  }
+  // onClose() {
+  //   this.closeSidenav.emit();
+  // }
 
   onLogout() {
-    localStorage.removeItem('user.email');
-    localStorage.removeItem('user.name');
-
     this.userService.logout();
   }
 
-  ngOnDestroy() {
-    this.authSubscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.authSubscription.unsubscribe();
+  // }
 }

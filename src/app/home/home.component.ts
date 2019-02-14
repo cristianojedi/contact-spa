@@ -8,14 +8,15 @@ import { UserService } from "../services/user.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public name: string;
+  
   constructor(
     private userService: UserService
-  ) { }
+  ) {
+    this.name = localStorage.getItem('user.name');
+  }
 
   ngOnInit() {
-    // if (!this.userService.isAuth())
-    //   this.userService.logout();
   }
 
 }

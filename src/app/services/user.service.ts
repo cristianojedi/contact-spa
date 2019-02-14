@@ -3,23 +3,28 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from '@angular/router';
 
 import { Observable } from "rxjs/Rx";
-import { Subject } from 'rxjs/Subject';
+// import { Subject } from 'rxjs/Subject';
+import "rxjs/add/observable/throw";
 
 import { Login } from "../auth/models/login";
 import { User } from "../auth/models/user";
+import { ServiceBase } from "../services/service.base";
 
 @Injectable()
-export class UserService {
-    private url: string = "http://localhost:3000/users/authenticate/";
+export class UserService extends ServiceBase {
+    private url: string = "http://localhost:3000/users";
+    private token: string;
 
-    authChange = new Subject<boolean>();
+    // authChange = new Subject<boolean>();
 
-    private isAuthenticated = false;
+    // private isAuthenticated = false;
 
     constructor(
         private http: HttpClient,
         private router: Router
-    ) { }
+    ) {
+        super();
+    }
 
     private getHeadersJson() {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -27,62 +32,48 @@ export class UserService {
         return options;
     }
 
-    // registerUser(authData: AuthData) {
-    //     this.user = {
-    //       email: authData.email,
-    //       userId: Math.round(Math.random() * 10000).toString()
-    //     };
-    //     this.authSuccessfully();
-    //   }
-
-    authenticate(login: Login): Observable<User> {
-        let res = this.http.post<User>(this.url, login, this.getHeadersJson());
-        this.authSuccessfully();
+    insert(login: Login): Observable<Login> {
+        let res = this.http.post<Login>(this.url, login, this.getHeadersJson())
         return res;
     }
 
+    authenticate(login: Login): Observable<User> {
+        return this.http.post<User>(this.url + "/authenticate/", login, this.getHeadersJson())
+            .catch(super.serviceError);
+    }
+
     logout() {
-        this.authChange.next(false);
+        localStorage.removeItem('user.email');
+        localStorage.removeItem('user.name');
+        localStorage.removeItem('user.token');
+
+        // this.authChange.next(false);
         this.router.navigate(['/login']);
-        this.isAuthenticated = false;
+        // this.isAuthenticated = false;
     }
 
-    isAuth() {
-        return this.isAuthenticated;
-    }
+    // isAuth() {
+    //     // console.log('this.isAuthenticated: ' + this.isAuthenticated);
+    //     // console.log('localStorage.getItem(user.token): ' + localStorage.getItem('user.token'));
+    //     // return this.isAuthenticated || localStorage.getItem('user.token');
 
-    private authSuccessfully() {
-        this.isAuthenticated = true;
-        this.authChange.next(true);
-        this.router.navigate(['/']);
-    }
-
-    // list() {
-    //     return this.http.get<Book[]>(this.url, this.getHeadersJson());
+    //     console.log('USER.SERVICE: this.isAuthenticated: ' + this.isAuthenticated);
+    //     console.log('USER.SERVICE: localStorage.getItem(user.token): ' + localStorage.getItem('user.token'));
+    //     // return this.isAuthenticated || localStorage.getItem('user.token');
+    //     return this.isAuthenticated;
     // }
 
-    // insert(book: Book): Observable<Book> {
-    //     let response = this.http
-    //         .post<Book>(this.url, book, this.getHeadersJson());
-
-    //     return response;
+    // public authSuccessfully() {
+    //     this.isAuthenticated = true;
+    //     this.authChange.next(true);
+    //     this.router.navigate(['/']);
     // }
 
-    // get(id: number): Observable<Book> {
-    //     let response = this.http
-    //         .get<Book>(this.url + '/' + id, this.getHeadersJson());
-
-    //     return response;
-    // }
-
-    // update(book: Book): Observable<Book> {
-    //     let response = this.http
-    //         .put<Book>(this.url + '/' + book.id, book, this.getHeadersJson());
-
-    //     return response;
-    // }
-
-    // delete(id: number) {
-    //     return this.http.delete(this.url + '/' + id, this.getHeadersJson());
+    // public isAuth() {
+    //     this.token = localStorage.getItem('user.token');
+    //     if (this.token)
+    //         return true;
+    //     else
+    //         return false;
     // }
 }

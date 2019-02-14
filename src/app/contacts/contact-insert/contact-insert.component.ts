@@ -37,12 +37,12 @@ export class ContactInsertComponent implements OnInit {
 
       this.contactService.insert(contact)
         .subscribe(
-          response => { this.onInsertComplete(response) }
+          res => { this.onInsertComplete(res) }
         );
     }
   }
 
-  onInsertComplete(response: any) {
+  onInsertComplete(res: any) {
     this.insertContactForm.reset();
     this.router.navigate(['/contacts']);
   }

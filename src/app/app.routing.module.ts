@@ -12,17 +12,14 @@ import { ContactUpdateComponent } from './contacts/contact-update/contact-update
 import { ContactDeleteComponent } from './contacts/contact-delete/contact-delete.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'contacts', component: ContactListComponent },
-  // { path: 'contact-insert', component: ContactInsertComponent, canActivate: [AuthGuard] },
-  // { path: 'contact-update', component: ContactUpdateComponent, canActivate: [AuthGuard] },
-  // { path: 'contact-delete', component: ContactDeleteComponent, canActivate: [AuthGuard] }
-  { path: 'contact-insert', component: ContactInsertComponent },
-  { path: 'contact-update/:id', component: ContactUpdateComponent },
-  { path: 'contact-delete', component: ContactDeleteComponent }
+  { path: 'contacts', component: ContactListComponent, canActivate: [AuthGuard] },
+  { path: 'contact-insert', component: ContactInsertComponent, canActivate: [AuthGuard] },
+  { path: 'contact-update/:id', component: ContactUpdateComponent, canActivate: [AuthGuard] },
+  { path: 'contact-delete', component: ContactDeleteComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

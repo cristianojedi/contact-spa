@@ -1,15 +1,30 @@
-<section>
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <mat-form-field>
-      <input type="email" matInput placeholder="Seu e-mail" ngModel name="email" email required #emailInput="ngModel">
-      <mat-error *ngIf="emailInput.hasError('required')">Email é obrigatório</mat-error>
-      <mat-error *ngIf="!emailInput.hasError('required')">E-Mail inválido</mat-error>
-    </mat-form-field>
-    <mat-form-field hintLabel="Deve conter pelo menos 6 caracteres">
-      <input type="password" matInput placeholder="Sua senha" ngModel name="password" required minlength="6" maxlength="20" #pwInput="ngModel">
-      <mat-hint align="end">{{ pwInput.value?.length }} / 20</mat-hint>
-      <mat-error>Tem que ter pelo menos 6 caracteres</mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Registrar</button>
-  </form>
-</section>
+<div class="center">
+  <section>
+    <form fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" [formGroup]="insertUserForm" (ngSubmit)="onInsert()">
+      <mat-form-field hintLabel="Deve conter pelo menos 2 caracteres">
+        <input matInput #inputName placeholder="Seu nome" formControlName="name" required minlength="2" maxlength="100">
+        <mat-hint align="end">{{inputName.value?.length || 0}} / 100</mat-hint>
+        <mat-error>Tem que ter pelo menos 2 caracteres</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput #inputEmail type="email" placeholder="Seu e-mail" formControlName="email" required maxlength="150">
+        <mat-hint align="end">{{inputEmail.value?.length || 0}} / 150</mat-hint>
+        <mat-error>E-mail inválido</mat-error>
+        <mat-hint>Digite um e-mail válido</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Deve conter pelo menos 6 caracteres">
+        <input matInput #inputPassword type="password" placeholder="Sua senha" formControlName="password" required minlength="6" maxlength="20">
+        <mat-hint align="end">{{inputPassword.value?.length || 0}} / 20</mat-hint>
+        <mat-error>Tem que ter pelo menos 6 caracteres</mat-error>
+      </mat-form-field>
+
+      <div class="flexbox-parent">
+        <div layout="row" layout-align="center" fxLayoutGap="10px">
+          <button type="submit" mat-raised-button color="primary" [disabled]="insertUserForm.invalid">Registrar</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

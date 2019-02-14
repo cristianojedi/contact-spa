@@ -34,7 +34,7 @@ export class ContactListComponent implements OnInit {
   }
 
   onUpdateContact(id){
-    this.router.navigate(['/contact-update/' + id]);
+    this.router.navigate(['contact-update/' + id]);
   }
 
 }

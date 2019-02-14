@@ -5,15 +5,36 @@ import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+    private token: string;
+
     constructor(
         private userService: UserService,
         private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.userService.isAuth()) {
-            return true;
-        } else {
-            this.router.navigate(['/login']);
+        this.token = localStorage.getItem('user.token');
+
+        if (!this.token) {
+            this.router.navigate(['/login'])
+            return false;
         }
+
+        return true;
+
+        // this.token = localStorage.getItem('user.token');
+
+        // if (this.token || this.userService.isAuth()) {
+        //     return true;
+        // } else {
+        //     this.router.navigate(['/login'])
+        //     return false;
+        // }
+
+        // if (this.userService.isAuth()) {
+        //     return true;
+        // } else {
+        //     this.router.navigate(['/login']);
+        // }
+
     }
 }

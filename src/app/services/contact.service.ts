@@ -9,12 +9,15 @@ import { Contact } from "../contacts/models/contact";
 export class ContactService {
     private url: string = "http://localhost:3000/contacts";
 
+    public token: string;
+
     constructor(
         private http: HttpClient
     ) { }
 
     private getHeadersJson() {
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        this.token = localStorage.getItem('user.token');
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'x-access-token': this.token });
         let options = { headers: headers };
         return options;
     }
@@ -42,29 +45,4 @@ export class ContactService {
     delete(id: string) {
         return this.http.delete(this.url + '/' + id, this.getHeadersJson());
     }
-
-    // insert(book: Book): Observable<Book> {
-    //     let response = this.http
-    //         .post<Book>(this.url, book, this.getHeadersJson());
-
-    //     return response;
-    // }
-
-    // get(id: number): Observable<Book> {
-    //     let response = this.http
-    //         .get<Book>(this.url + '/' + id, this.getHeadersJson());
-
-    //     return response;
-    // }
-
-    // update(book: Book): Observable<Book> {
-    //     let response = this.http
-    //         .put<Book>(this.url + '/' + book.id, book, this.getHeadersJson());
-
-    //     return response;
-    // }
-
-    // delete(id: number) {
-    //     return this.http.delete(this.url + '/' + id, this.getHeadersJson());
-    // }
 }
